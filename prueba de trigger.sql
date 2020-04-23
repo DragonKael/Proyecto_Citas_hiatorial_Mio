@@ -1,0 +1,53 @@
+-- use bd_cita_medica;
+-- drop trigger if exists tr_modificado;
+-- delimiter %%
+-- create trigger tr_modificado before update
+-- on tusuario for each row
+-- 	begin 
+--         set @oldid_user=old.id_usuario;
+-- 		set @old_nombre_usuario=old.nombre_usuario;
+-- 		set @old_nombre=old.nombre;
+-- 		set @old_apaterno=old.apaterno;
+-- 		set @old_amaterno=old.amaterno;
+-- 		set @old_email=old.email;
+-- 		set @old_contrasenia=old.contrasenia;
+-- 		set @old_es_activo=old.es_activo;
+-- 		set @old_es_administrador=old.es_administrador;
+-- 		set @old_creado_en=old.creado_en;        
+--         set @newid_user=new.id_usuario;
+-- 		set @new_nombre_usuario=new.nombre_usuario;
+-- 		set @new_nombre=new.nombre;
+-- 		set @new_apaterno=new.apaterno;
+-- 		set @new_amaterno=new.amaterno;
+-- 		set @new_email=new.email;
+-- 		set @new_contrasenia=new.contrasenia;
+-- 		set @new_es_activo=new.es_activo;
+-- 		set @new_es_administrador=new.es_administrador;
+-- 		set @new_creado_en=new.creado_en;
+--         set @tori=concat(@oldid_user," ",
+-- 						@old_nombre_usuario," ",
+--                         @old_nombre," ",
+-- 						@old_apaterno," ",
+-- 						@old_amaterno," ",
+-- 						@old_email," ",
+-- 						@old_contrasenia," ",
+-- 						@old_es_activo," ",
+-- 						@old_es_administrador," ",
+-- 						@old_creado_en);
+-- 		set @modi=concat(@newid_user," ",
+-- 						@new_nombre_usuario," ",
+--                         @new_nombre," ",
+-- 						@new_apaterno," ",
+-- 						@new_amaterno," ",
+-- 						@new_email," ",
+-- 						@new_contrasenia," ",
+-- 						@new_es_activo," ",
+-- 						@new_es_administrador," ",
+-- 						@new_creado_en);
+-- 		insert into tmodificado values (null,
+-- 									'tusuario',
+-- 									now(),
+-- 									1,
+-- 									@tori,
+-- 									@modi);
+-- end %%

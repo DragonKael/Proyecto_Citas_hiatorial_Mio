@@ -1,0 +1,61 @@
+-- set global log_bin_trust_function_creators = 1;
+-- use bd_cita_medica;
+-- --  listar
+-- drop procedure if exists usp_listar_modificado;
+-- -- drop procedure if exists usp_recuperar_modificado;
+-- drop procedure if exists usp_insertar_modificado;
+-- drop function if exists fn_generar_id_modificado;
+-- drop procedure if exists usp_modificar_modificado;
+-- drop procedure if exists usp_eliminar_modificado;
+-- delimiter XD
+-- 	create procedure usp_listar_modificado(pbuscar varchar(50))
+-- 		begin
+-- 			select *
+-- 			from tmodificado
+-- 			where id_usuario like concat('%',pbuscar,'%');
+-- 		end XD
+-- 	-- funcion generar id modificado
+-- -- crear genero
+-- 	create function fn_generar_id_modificado()
+-- 				returns int
+-- 		begin
+-- 			set @id_modificado=(select count(*)from tmodificado);
+-- 				if(@id_modificado=0)then
+-- 					return 1;
+-- 				else
+-- 					begin
+-- 						set @id_modificado=(select max(id_modificado)from tmodificado)+1;
+--                         return @id_modificado;
+--                     end;
+-- 				end if;		
+-- 	end XD
+-- 	create procedure usp_insertar_modificado(ptabla_modificada varchar(20),
+-- 												pfecha datetime,
+-- 												pid_user int,
+-- 												poriginal text,
+-- 												pmodificado text)
+-- 		begin
+-- 			set @id_modificado=fn_generar_id_modificado();
+-- 			if exists(	select *
+-- 						from tmodificado
+-- 						where (id_modificado=@id_modificado))then
+-- 				begin
+-- 					set @mensaje='error';
+-- 					set @id_error=1;
+-- 				end;
+-- 			else
+-- 				begin
+-- 					insert into tmodificado values(@id_modificado,
+-- 													ptabla_modificada,
+-- 													pfecha ,
+-- 													pidusuario,
+-- 													poriginal,
+-- 													pmodificado);
+-- 					set@mensaje='se registro la modificacion';
+-- 					set@id_error=0;
+-- 				end;
+-- 			end if;
+-- 			select @mensaje,@id_error;
+--             select * from tmodificado;
+-- 		end XD 
+-- -- modificar
